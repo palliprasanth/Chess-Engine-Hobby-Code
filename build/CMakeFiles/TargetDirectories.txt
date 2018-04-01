@@ -1,6 +1,0 @@
-C:/Users/palli/24783/Chess Engine/build/CMakeFiles/ALL_BUILD.dir
-C:/Users/palli/24783/Chess Engine/build/CMakeFiles/ZERO_CHECK.dir
-C:/Users/palli/24783/Chess Engine/build/src/CMakeFiles/chess_engine.dir
-C:/Users/palli/24783/Chess Engine/build/include/definitions/CMakeFiles/definitions.dir
-C:/Users/palli/24783/Chess Engine/build/include/chess_board/CMakeFiles/chess_board.dir
-C:/Users/palli/24783/Chess Engine/build/include/helper_functions/CMakeFiles/helper_functions.dir

@@ -61,9 +61,10 @@ public:
 	array<int, 13> pieceNum;
 
  	// Number of pieces on the board by color
-	array<int, 3> bigPiece; // All pieces except pawns for White, Black and Both
-	array<int, 3> majorPiece; // Rooks and Queens
-	array<int, 3> minorPiece; // Bishop and Knights
+	array<int, 2> bigPiece; // All pieces except pawns for White, Black
+	array<int, 2> majorPiece; // Rooks and Queens
+	array<int, 2> minorPiece; // Bishop and Knights
+	array<int, 2> score; // scores for each color
 
 	// Stores the history of the entire game
 	array<History,MAXGAMEMOVES> history;
@@ -71,10 +72,46 @@ public:
 	// Stores the list of pieces of the current configuration. In the worst possible case two rooks and 8 pawns can be substituting rooks
 	array<array<int, 13>, 10> piece_list;
 
-	
-
 	ChessBoard();
 	~ChessBoard();
+	void reset_board();
+	void print_board();
+	void update_material_score();
+	bool square_attacked(const int sq, const int side);
 }; 
 
-#endif CHESS_BOARD_HEADER
+
+class PieceHashKeys{
+public: 
+	array<array<long long int, 13>, 120> piece_keys;
+	long long int side_key;
+	array<long long int,16> castling_keys;
+
+	void init_Hash_Keys();
+};
+
+class MoveClass{
+public:
+	int move;
+	int score; // For move ordering
+};
+
+class MoveList{
+public:
+	array<MoveClass, MAXPOSMOVES> moves;
+	int count; // Number of moves
+};
+
+long long int generate_position_key(const ChessBoard &my_board, PieceHashKeys &keys);
+int parse_configuration(ChessBoard &my_board, char* cur_configuration, PieceHashKeys &keys);
+
+// Move Generation Functions come here
+void print_move_list(const MoveList &my_move_list);
+
+void add_quiet_move(const ChessBoard &my_board, MoveList &my_move_list, int move_data);
+void add_capture_move(const ChessBoard &my_board, MoveList &my_move_list, int move_data);
+void add_enpassant_move(const ChessBoard &my_board, MoveList &my_move_list, int move_data);
+
+void generate_moves(const ChessBoard &my_board, MoveList &my_move_list);
+
+#endif //CHESS_BOARD_HEADER
